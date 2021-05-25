@@ -1,0 +1,12 @@
+install -d -m0755 %{buildroot}/usr/bin
+install -m0755 bin/linux_amd64/amazon-ssm-agent    %{buildroot}/usr/bin/amazon-ssm-agent
+install -m0755 bin/linux_amd64/ssm-agent-worker    %{buildroot}/usr/bin/ssm-agent-worker
+install -m0755 bin/linux_amd64/ssm-cli             %{buildroot}/usr/bin/ssm-cli
+install -m0755 bin/linux_amd64/ssm-document-worker %{buildroot}/usr/bin/ssm-document-worker
+install -m0755 bin/linux_amd64/ssm-session-worker  %{buildroot}/usr/bin/ssm-session-worker
+install -m0755 bin/linux_amd64/ssm-session-logger  %{buildroot}/usr/bin/ssm-session-logger
+mkdir -p %{buildroot}/usr/lib/systemd/system
+install -m0644 packaging/linux/amazon-ssm-agent.service  %{buildroot}/usr/lib/systemd/system/
+mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -s ../amazon-ssm-agent.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/
+
