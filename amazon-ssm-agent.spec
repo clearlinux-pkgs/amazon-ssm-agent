@@ -4,17 +4,19 @@
 #
 Name     : amazon-ssm-agent
 Version  : 3.0.1209.0
-Release  : 1
+Release  : 3
 URL      : https://github.com/aws/amazon-ssm-agent/archive/refs/tags/3.0.1209.0.tar.gz
 Source0  : https://github.com/aws/amazon-ssm-agent/archive/refs/tags/3.0.1209.0.tar.gz
-Summary  : No detailed summary available
+Summary  : Manage EC2 Instances using SSM APIs
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC-BY-3.0 ISC MIT
 Requires: amazon-ssm-agent-autostart = %{version}-%{release}
 Requires: amazon-ssm-agent-bin = %{version}-%{release}
+Requires: amazon-ssm-agent-data = %{version}-%{release}
 Requires: amazon-ssm-agent-license = %{version}-%{release}
 Requires: amazon-ssm-agent-services = %{version}-%{release}
 BuildRequires : buildreq-golang
+Patch1: 0001-Stateless-patch.patch
 
 %description
 This package provides Amazon SSM Agent for managing EC2 Instances using SSM APIs
@@ -30,11 +32,20 @@ autostart components for the amazon-ssm-agent package.
 %package bin
 Summary: bin components for the amazon-ssm-agent package.
 Group: Binaries
+Requires: amazon-ssm-agent-data = %{version}-%{release}
 Requires: amazon-ssm-agent-license = %{version}-%{release}
 Requires: amazon-ssm-agent-services = %{version}-%{release}
 
 %description bin
 bin components for the amazon-ssm-agent package.
+
+
+%package data
+Summary: data components for the amazon-ssm-agent package.
+Group: Data
+
+%description data
+data components for the amazon-ssm-agent package.
 
 
 %package license
@@ -56,6 +67,7 @@ services components for the amazon-ssm-agent package.
 %prep
 %setup -q -n amazon-ssm-agent-3.0.1209.0
 cd %{_builddir}/amazon-ssm-agent-3.0.1209.0
+%patch1 -p1
 
 %build
 ## build_prepend content
@@ -65,7 +77,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1621966564
+export SOURCE_DATE_EPOCH=1621974868
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -78,7 +90,7 @@ make  %{?_smp_mflags}  build-linux
 
 
 %install
-export SOURCE_DATE_EPOCH=1621966564
+export SOURCE_DATE_EPOCH=1621974868
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/amazon-ssm-agent
 cp %{_builddir}/amazon-ssm-agent-3.0.1209.0/LICENSE %{buildroot}/usr/share/package-licenses/amazon-ssm-agent/2b8b815229aa8a61e483fb4ba0588b8b6c491890
@@ -148,7 +160,8 @@ mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m0644 packaging/linux/amazon-ssm-agent.service  %{buildroot}/usr/lib/systemd/system/
 mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 ln -s ../amazon-ssm-agent.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/
-
+mkdir -p %{buildroot}/usr/share/defaults/etc/amazon/ssm
+install -m0644 seelog_unix.xml  %{buildroot}/usr/share/defaults/etc/amazon/ssm/seelog.xml
 ## install_append end
 
 %files
@@ -166,6 +179,10 @@ ln -s ../amazon-ssm-agent.service %{buildroot}/usr/lib/systemd/system/multi-user
 /usr/bin/ssm-document-worker
 /usr/bin/ssm-session-logger
 /usr/bin/ssm-session-worker
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/defaults/etc/amazon/ssm/seelog.xml
 
 %files license
 %defattr(0644,root,root,0755)

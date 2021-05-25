@@ -9,4 +9,5 @@ mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m0644 packaging/linux/amazon-ssm-agent.service  %{buildroot}/usr/lib/systemd/system/
 mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
 ln -s ../amazon-ssm-agent.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/
-
+mkdir -p %{buildroot}/usr/share/defaults/etc/amazon/ssm
+install -m0644 seelog_unix.xml  %{buildroot}/usr/share/defaults/etc/amazon/ssm/seelog.xml

@@ -1,0 +1,26 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Mark D Horn <mark.d.horn@intel.com>
+Date: Tue, 25 May 2021 13:29:47 -0700
+Subject: [PATCH] Stateless patch
+
+Signed-off-by: Mark D Horn <mark.d.horn@intel.com>
+---
+ agent/appconfig/constants_unix.go | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/agent/appconfig/constants_unix.go b/agent/appconfig/constants_unix.go
+index 7ff090bff5d4..d9b00d7316f1 100644
+--- a/agent/appconfig/constants_unix.go
++++ b/agent/appconfig/constants_unix.go
+@@ -112,7 +112,7 @@ const (
+ var PowerShellPluginCommandName string
+ 
+ // DefaultProgramFolder is the default folder for SSM
+-var DefaultProgramFolder = "/etc/amazon/ssm/"
++var DefaultProgramFolder = "/usr/share/defaults/etc/amazon/ssm/"
+ 
+ var defaultWorkerPath = "/usr/bin/"
+ var DefaultSSMAgentWorker = defaultWorkerPath + "ssm-agent-worker"
+-- 
+2.31.1
+
