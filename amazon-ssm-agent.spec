@@ -4,7 +4,7 @@
 #
 Name     : amazon-ssm-agent
 Version  : 3.0.1295.0
-Release  : 4
+Release  : 5
 URL      : https://github.com/aws/amazon-ssm-agent/archive/refs/tags/3.0.1295.0.tar.gz
 Source0  : https://github.com/aws/amazon-ssm-agent/archive/refs/tags/3.0.1295.0.tar.gz
 Summary  : Manage EC2 Instances using SSM APIs
@@ -71,13 +71,13 @@ cd %{_builddir}/amazon-ssm-agent-3.0.1295.0
 
 %build
 ## build_prepend content
-export GOFLAGS='-buildmode=pie'
+export GOFLAGS='-buildmode=pie' GO111MODULE="auto"
 ## build_prepend end
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1623800521
+export SOURCE_DATE_EPOCH=1625707299
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -90,7 +90,7 @@ make  %{?_smp_mflags}  build-linux
 
 
 %install
-export SOURCE_DATE_EPOCH=1623800521
+export SOURCE_DATE_EPOCH=1625707299
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/amazon-ssm-agent
 cp %{_builddir}/amazon-ssm-agent-3.0.1295.0/LICENSE %{buildroot}/usr/share/package-licenses/amazon-ssm-agent/2b8b815229aa8a61e483fb4ba0588b8b6c491890

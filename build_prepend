@@ -1,1 +1,1 @@
-export GOFLAGS='-buildmode=pie'
+export GOFLAGS='-buildmode=pie' GO111MODULE="auto"
