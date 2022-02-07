@@ -1,5 +1,5 @@
 PKG_NAME := amazon-ssm-agent
-URL = https://github.com/aws/amazon-ssm-agent/archive/3.1.821.0/amazon-ssm-agent-3.1.821.0.tar.gz
+URL = https://github.com/aws/amazon-ssm-agent/archive/3.1.941.0/amazon-ssm-agent-3.1.941.0.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
