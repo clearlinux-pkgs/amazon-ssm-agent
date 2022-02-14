@@ -4,7 +4,7 @@
 #
 Name     : amazon-ssm-agent
 Version  : 3.1.941.0
-Release  : 22
+Release  : 23
 URL      : https://github.com/aws/amazon-ssm-agent/archive/3.1.941.0/amazon-ssm-agent-3.1.941.0.tar.gz
 Source0  : https://github.com/aws/amazon-ssm-agent/archive/3.1.941.0/amazon-ssm-agent-3.1.941.0.tar.gz
 Summary  : Manage EC2 Instances using SSM APIs
