@@ -9,10 +9,10 @@ Signed-off-by: Mark D Horn <mark.d.horn@intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/agent/appconfig/constants_unix.go b/agent/appconfig/constants_unix.go
-index 7ff090bff5d4..d9b00d7316f1 100644
+index 842fc62..a48b39f 100644
 --- a/agent/appconfig/constants_unix.go
 +++ b/agent/appconfig/constants_unix.go
-@@ -112,7 +112,7 @@ const (
+@@ -113,7 +113,7 @@ var (
  var PowerShellPluginCommandName string
  
  // DefaultProgramFolder is the default folder for SSM
@@ -20,7 +20,4 @@ index 7ff090bff5d4..d9b00d7316f1 100644
 +var DefaultProgramFolder = "/usr/share/defaults/etc/amazon/ssm/"
  
  var defaultWorkerPath = "/usr/bin/"
- var DefaultSSMAgentWorker = defaultWorkerPath + "ssm-agent-worker"
--- 
-2.31.1
-
+ var DefaultSSMAgentBinaryPath = defaultWorkerPath + "amazon-ssm-agent"
