@@ -4,7 +4,7 @@
 #
 Name     : amazon-ssm-agent
 Version  : 3.1.1634.0
-Release  : 38
+Release  : 39
 URL      : https://github.com/aws/amazon-ssm-agent/archive/3.1.1634.0/amazon-ssm-agent-3.1.1634.0.tar.gz
 Source0  : https://github.com/aws/amazon-ssm-agent/archive/3.1.1634.0/amazon-ssm-agent-3.1.1634.0.tar.gz
 Summary  : Manage EC2 Instances using SSM APIs
@@ -17,6 +17,7 @@ Requires: amazon-ssm-agent-license = %{version}-%{release}
 Requires: amazon-ssm-agent-services = %{version}-%{release}
 BuildRequires : buildreq-golang
 Patch1: 0001-Stateless-patch.patch
+Patch2: 0002-Avoid-style-checks-for-the-build.patch
 
 %description
 This package provides Amazon SSM Agent for managing EC2 Instances using SSM APIs
@@ -68,6 +69,7 @@ services components for the amazon-ssm-agent package.
 %setup -q -n amazon-ssm-agent-3.1.1634.0
 cd %{_builddir}/amazon-ssm-agent-3.1.1634.0
 %patch1 -p1
+%patch2 -p1
 
 %build
 ## build_prepend content
@@ -77,7 +79,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1658769627
+export SOURCE_DATE_EPOCH=1662505271
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -90,7 +92,7 @@ make  %{?_smp_mflags}  build-linux
 
 
 %install
-export SOURCE_DATE_EPOCH=1658769627
+export SOURCE_DATE_EPOCH=1662505271
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/amazon-ssm-agent
 cp %{_builddir}/amazon-ssm-agent-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/amazon-ssm-agent/2b8b815229aa8a61e483fb4ba0588b8b6c491890

@@ -1,0 +1,27 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Patrick McCarty <patrick.mccarty@intel.com>
+Date: Tue, 6 Sep 2022 22:56:16 +0000
+Subject: [PATCH] Avoid style checks for the build
+
+The `gofmt` checks in particular broke after introducing Go 1.19.
+
+These checks are useful for the upstream developers but not for distros.
+
+Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
+---
+ makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/makefile b/makefile
+index 9faf553..7a6fb2e 100644
+--- a/makefile
++++ b/makefile
+@@ -17,7 +17,7 @@ export GO_SPACE
+ 
+ checkstyle::
+ #   Run checkstyle script
+-	$(GO_SPACE)/Tools/src/checkstyle.sh
++	@echo skipping $(GO_SPACE)/Tools/src/checkstyle.sh
+ 
+ coverage:: build-linux
+ 	$(GO_SPACE)/Tools/src/coverage.sh \
