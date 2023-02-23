@@ -1,1 +1,2 @@
 export GOFLAGS='-buildmode=pie' GO111MODULE="auto"
+unset CLEAR_DEBUG_TERSE
